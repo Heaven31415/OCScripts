@@ -168,6 +168,7 @@ local count = ...
 
 if not count then
   print("Usage: createBread count")
+  return
 end
 
 for i=1,tonumber(count) do
