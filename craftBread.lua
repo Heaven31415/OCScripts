@@ -51,14 +51,14 @@ function checkItemRequirements()
 end
 
 function moveToWater()
-  robot.turnRight()
-  robot.forward()
+  robot.turnLeft()
+  for i=1,2 do robot.forward() end
 end
 
 function moveToCharger()
   robot.turnAround()
-  robot.forward()
-  robot.turnRight()
+  for i=1,2 do robot.forward() end
+  robot.turnLeft()
 end
 
 function checkWaterRequirements(tank, amount)
