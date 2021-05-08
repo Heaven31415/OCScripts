@@ -147,7 +147,7 @@ function craftBread()
   robot.transferTo(BAKEWARE_SLOT_ID, 1)
 end
 
-function tryToCreateBread()
+function bakeBread()
   if not checkItemRequirements() then return end
 
   if not checkWaterRequirements(WATER_TANK_ID, MINIMUM_WATER_AMOUNT) then
@@ -164,13 +164,19 @@ function tryToCreateBread()
   craftBread()
 end
 
-local count = ...
+function getWheatCount()
+  local wheat = inventoryController.getStackInInternalSlot(WHEAT_SLOT_ID)
 
-if not count then
-  print("Usage: createBread count")
-  return
+  if not wheat then return 0 end
+
+  return wheat.size
 end
 
-for i=1,tonumber(count) do
-  tryToCreateBread()
+local wheatCount = getWheatCount()
+
+if wheatCount == 0 then
+  print('Please put more wheat into slot with green border')
+  robot.select(WHEAT_SLOT_ID)
+else
+  for i=1,wheatCount do bakeBread() end
 end
